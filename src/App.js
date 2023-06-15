@@ -1,24 +1,17 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import AddTask from './components/AddTask';
+import Alert from './components/Alert';
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [triggerAlert, setTriggerAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {triggerAlert && <Alert message={alertMessage} />}
+      <AddTask tasks={tasks} setTasks={setTasks} setTriggerAlert={setTriggerAlert} setAlertMessage={setAlertMessage} />
+    </>
   );
 }
 
