@@ -21,7 +21,7 @@ export default function AddTask(props) {
             return;
         }
         try {
-            await fetch("https://task-manager-backend-production-0c63.up.railway.app/addTask", {
+            await fetch("https://task-manager-backend-z56o.onrender.com/addTask", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -59,7 +59,7 @@ export default function AddTask(props) {
             alert("Cannot add empty task");
             return;
         }
-        await fetch("https://task-manager-backend-production-0c63.up.railway.app/editTask", {
+        await fetch("https://task-manager-backend-z56o.onrender.com/editTask", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

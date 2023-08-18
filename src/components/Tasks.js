@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Task from './Task';
+import Spinner from "./Spinner";
 
 export default function Tasks(props) {
     const { tasks, setTasks, handleEdit, setAlertMessage, setTriggerAlert } = props;
+    const [loading, setLoading] = useState(true);
     const fetchTasks = async () => {
         try {
-            const response = await fetch("https://task-manager-backend-production-0c63.up.railway.app/getTasks", {
+            const response = await fetch("https://task-manager-backend-z56o.onrender.com/getTasks", {
                 method: "GET"
             })
             const tasksArray = await response.json();
             setTasks(tasksArray);
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -22,7 +25,7 @@ export default function Tasks(props) {
 
     const handleDelete = async (id) => {
         try {
-            await fetch("https://task-manager-backend-production-0c63.up.railway.app/deleteTask", {
+            await fetch("https://task-manager-backend-z56o.onrender.com/deleteTask", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,7 +44,7 @@ export default function Tasks(props) {
     }
 
     const handleMarkCompleted = async (id) => {
-        await fetch("https://task-manager-backend-production-0c63.up.railway.app/editTask", {
+        await fetch("https://task-manager-backend-z56o.onrender.com/editTask", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +64,8 @@ export default function Tasks(props) {
 
     return (
         <>
-            {tasks.length === 0 ? <h3 className='text-center mt-3'>No tasks to display</h3> :
+            {loading ? <Spinner />:
+            tasks.length === 0 ? <h3 className='text-center mt-3'>No tasks to display</h3> :
                 <div className='container'>
                     <h2 className='text-center my-2'>Your Tasks List</h2>
                     <div className="table-responsive">
